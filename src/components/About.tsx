@@ -5,28 +5,10 @@ import { Target, Users, Rocket, Award, Zap } from 'lucide-react'
 
 const About = () => {
   const stats = [
-    { number: '100+', label: 'Projects Delivered', icon: Target },
+    { number: '500+', label: 'Projects Completed', icon: Rocket },
     { number: '50+', label: 'Happy Clients', icon: Users },
     { number: '24/7', label: 'Support Available', icon: Rocket },
     { number: '99.9%', label: 'Client Satisfaction', icon: Award }
-  ]
-
-  const values = [
-    {
-      title: 'Innovation First',
-      description: 'We push boundaries and embrace cutting-edge technologies to solve tomorrow\'s problems today.',
-      icon: Rocket
-    },
-    {
-      title: 'Quality Excellence',
-      description: 'Every product we build meets the highest standards of quality, performance, and user experience.',
-      icon: Award
-    },
-    {
-      title: 'Client Success',
-      description: 'Your success is our success. We partner with you to achieve extraordinary results.',
-      icon: Users
-    }
   ]
 
   return (
@@ -51,7 +33,7 @@ const About = () => {
             </span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            We're a visionary technology company dedicated to building the future through innovative AI and web solutions. 
+            We&apos;re a visionary technology company dedicated to building the future through innovative AI and web solutions. 
             Our mission is to transform ideas into powerful, scalable products that drive business growth and user engagement.
           </p>
         </motion.div>
@@ -95,12 +77,12 @@ const About = () => {
                 Transforming Businesses Through Technology
               </h2>
               <p className="text-lg text-gray-300 leading-relaxed mb-6">
-                At Codexiv, we're not just developers—we're strategic partners in your digital transformation journey. 
+                At Codexiv, we&apos;re not just developers—we&apos;re strategic partners in your digital transformation journey. 
                 We combine cutting-edge AI technology with proven development methodologies to deliver solutions that drive real business value.
               </p>
               <p className="text-lg text-gray-300 leading-relaxed mb-6">
                 Our team of experts works closely with you to understand your unique challenges, design custom solutions, 
-                and implement them with precision and care. From startups to enterprise clients, we've helped businesses 
+                and implement them with precision and care. From startups to enterprise clients, we&apos;ve helped businesses 
                 across industries achieve their digital goals.
               </p>
               <div className="flex items-center space-x-4">

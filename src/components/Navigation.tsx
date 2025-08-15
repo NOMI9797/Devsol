@@ -50,26 +50,20 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-gray-300 hover:text-white transition-colors duration-200">
-              Home
-            </Link>
-            <Link href="/services" className="text-gray-300 hover:text-white transition-colors duration-200">
-              Services
-            </Link>
-            <Link href="/projects" className="text-gray-300 hover:text-white transition-colors duration-200">
-              Projects
-            </Link>
-            <Link href="/team" className="text-gray-300 hover:text-white transition-colors duration-200">
-              Team
-            </Link>
-            <Link href="/about" className="text-gray-300 hover:text-white transition-colors duration-200">
-              About
-            </Link>
-            <Link href="/blog" className="text-gray-300 hover:text-white transition-colors duration-200">
-              Blog
-            </Link>
-            <Link href="/contact" className="text-gray-300 hover:text-white transition-colors duration-200">
-              Contact
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="text-gray-300 hover:text-white transition-colors duration-200 font-medium"
+              >
+                {item.name}
+              </Link>
+            ))}
+            <Link
+              href="/admin"
+              className="text-gray-400 hover:text-neon-blue transition-colors duration-200 text-sm font-medium"
+            >
+              Admin
             </Link>
           </div>
 
@@ -110,6 +104,13 @@ const Navigation = () => {
                   {item.name}
                 </Link>
               ))}
+              <Link 
+                href="/admin" 
+                onClick={() => setIsOpen(false)}
+                className="block text-neon-blue hover:text-neon-cyan transition-colors duration-200 font-medium py-2 border-t border-gray-700 pt-4"
+              >
+                Admin Dashboard
+              </Link>
               <Link href="/contact" className="w-full px-6 py-3 bg-gradient-to-r from-neon-blue to-neon-purple text-white rounded-full font-medium hover:shadow-lg hover:shadow-neon-blue/25 transition-all duration-300">
                 Get Started
               </Link>

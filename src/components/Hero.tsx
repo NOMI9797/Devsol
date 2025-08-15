@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowRight, Play, Zap, Shield, Globe } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
@@ -82,9 +81,9 @@ const Hero = () => {
           <button className="px-8 py-4 bg-gradient-to-r from-neon-blue to-neon-purple text-white rounded-full font-semibold text-lg hover:shadow-lg hover:shadow-neon-blue/25 transition-all duration-300 hover:scale-105">
             Start Your Project
           </button>
-          <button className="px-8 py-4 glass border border-neon-blue/20 text-neon-blue rounded-full font-semibold text-lg hover:bg-neon-blue hover:text-white transition-all duration-300">
-            <Link href="/services">View Our Services</Link>
-          </button>
+          <Link href="/services" className="px-8 py-4 glass border border-neon-blue/20 text-neon-blue rounded-full font-semibold text-lg hover:bg-neon-blue hover:text-white transition-all duration-300 text-center">
+            View Our Services
+          </Link>
         </motion.div>
       </div>
 

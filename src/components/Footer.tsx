@@ -2,27 +2,10 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { Zap, Mail, Phone, MapPin, Twitter, Linkedin, Github, Facebook } from 'lucide-react'
+import { Zap, Twitter, Linkedin, Github, Facebook } from 'lucide-react'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
-
-  const quickLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'Services', href: '/services' },
-    { name: 'About', href: '/about' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Contact', href: '/contact' }
-  ]
-
-  const services = [
-    'AI Development',
-    'Web Solutions',
-    'Cloud Infrastructure',
-    'Cybersecurity',
-    'Data Analytics',
-    'Custom Software'
-  ]
 
   const socialLinks = [
     { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/codexiv' },
@@ -69,13 +52,13 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-white">Quick Links</h3>
             <ul className="space-y-2">
-              <li><a href="/" className="text-gray-400 hover:text-neon-blue transition-colors duration-200">Home</a></li>
-              <li><a href="/services" className="text-gray-400 hover:text-neon-blue transition-colors duration-200">Our Services</a></li>
-              <li><a href="/projects" className="text-gray-400 hover:text-neon-blue transition-colors duration-200">Our Projects</a></li>
-              <li><a href="/team" className="text-gray-400 hover:text-neon-blue transition-colors duration-200">Our Team</a></li>
-              <li><a href="/about" className="text-gray-400 hover:text-neon-blue transition-colors duration-200">About Us</a></li>
-              <li><a href="/blog" className="text-gray-400 hover:text-neon-blue transition-colors duration-200">Blog</a></li>
-              <li><a href="/contact" className="text-gray-400 hover:text-neon-blue transition-colors duration-200">Contact</a></li>
+              <li><Link href="/" className="text-gray-400 hover:text-neon-blue transition-colors duration-200">Home</Link></li>
+              <li><Link href="/services" className="text-gray-400 hover:text-neon-blue transition-colors duration-200">Our Services</Link></li>
+              <li><Link href="/projects" className="text-gray-400 hover:text-neon-blue transition-colors duration-200">Our Projects</Link></li>
+              <li><Link href="/team" className="text-gray-400 hover:text-neon-blue transition-colors duration-200">Our Team</Link></li>
+              <li><Link href="/about" className="text-gray-400 hover:text-neon-blue transition-colors duration-200">About Us</Link></li>
+              <li><Link href="/blog" className="text-gray-400 hover:text-neon-blue transition-colors duration-200">Blog</Link></li>
+              <li><Link href="/contact" className="text-gray-400 hover:text-neon-blue transition-colors duration-200">Contact</Link></li>
             </ul>
           </div>
 

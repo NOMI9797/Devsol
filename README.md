@@ -27,6 +27,29 @@ A professional and futuristic website for **Codexiv**, a next-generation technol
 5. **Contact Page** - Service inquiries, consultation requests, and support
 6. **Global Footer** - Company information, quick links, and newsletter signup
 
+## 🔐 Admin Dashboard
+
+**Access URL**: `/admin` (e.g., `https://codexiv.com/admin`)
+
+### **Features**
+- **Secure Authentication**: Role-based access control with admin privileges
+- **Content Management**: Full CRUD operations for Projects, Team, Blogs, Services
+- **Real-time Statistics**: Live dashboard with content counts and metrics
+- **File Management**: Upload and manage images, icons, and media files
+- **Database Management**: Collection overview, data export, and monitoring
+- **Responsive Interface**: Mobile-friendly admin dashboard
+
+### **Content Types Managed**
+- **Projects**: Portfolio items with detailed information and media
+- **Team Members**: Staff profiles, expertise, and social links
+- **Blog Posts**: Articles, categories, tags, and SEO optimization
+- **Services**: Service offerings, pricing, and feature management
+- **Contact Submissions**: Form inquiries and response tracking
+- **Newsletter Subscribers**: Email list management
+
+### **Setup Instructions**
+See `ADMIN_SETUP.md` for detailed setup and configuration instructions.
+
 ## 🛠️ Tech Stack
 
 - **Framework**: Next.js 14 (App Router)
@@ -85,16 +108,24 @@ src/
 │   ├── page.tsx           # Homepage
 │   ├── about/             # About Us page
 │   ├── services/          # Services page
+│   ├── projects/          # Projects portfolio page
+│   ├── team/              # Team members page
 │   ├── blog/              # Blog/Insights page
-│   └── contact/           # Contact page
+│   ├── contact/           # Contact page
+│   └── admin/             # Admin dashboard
+│       ├── layout.tsx     # Admin authentication layout
+│       └── page.tsx       # Admin dashboard interface
 ├── components/             # Reusable UI components
 │   ├── Navigation.tsx     # Main navigation bar
 │   ├── Hero.tsx           # Hero section component
 │   ├── About.tsx          # About section component
 │   ├── Services.tsx       # Services showcase component
+│   ├── Projects.tsx       # Projects showcase component
+│   ├── Team.tsx           # Team showcase component
+│   ├── AdminAuth.tsx      # Admin authentication component
 │   └── Footer.tsx         # Global footer component
 ├── lib/                    # Utility libraries
-│   └── appwrite.ts        # Appwrite client configuration
+│   └── appwrite.ts        # Appwrite client and admin functions
 └── globals.css            # Global styles and Tailwind imports
 ```
 
