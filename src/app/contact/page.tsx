@@ -4,17 +4,20 @@ import { useState } from 'react'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle } from 'lucide-react'
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle, Loader2 } from 'lucide-react'
+import { createContactSubmission } from '@/lib/appwrite'
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     company: '',
-    subject: '',
+    subject: 'General Inquiry',
     message: ''
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -23,32 +26,45 @@ const ContactPage = () => {
     })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically send the form data to your backend
-    console.log('Form submitted:', formData)
-    setIsSubmitted(true)
-    setTimeout(() => setIsSubmitted(false), 5000)
+    
+    try {
+      setIsSubmitting(true)
+      setError(null)
+      
+      await createContactSubmission(formData)
+      
+      setIsSubmitted(true)
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        subject: 'General Inquiry',
+        message: ''
+      })
+      
+      setTimeout(() => setIsSubmitted(false), 5000)
+    } catch (err) {
+      console.error('Error submitting form:', err)
+      setError('Failed to submit form. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const contactInfo = [
     {
       icon: Mail,
       title: 'Email Us',
-      details: 'hello@codexiv.com',
+      details: 'devsol.ai.tech@gmail.com',
       description: 'We\'ll get back to you within 24 hours'
     },
     {
       icon: Phone,
       title: 'Call Us',
-      details: '+1 (555) 123-4567',
+      details: '(03121281801) / (03021685211)',
       description: 'Mon-Fri from 8am to 6pm PST'
-    },
-    {
-      icon: MapPin,
-      title: 'Visit Us',
-      details: 'San Francisco, CA',
-      description: 'Schedule an in-person meeting'
     },
     {
       icon: Clock,
@@ -92,7 +108,7 @@ const ContactPage = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
           >
-            Ready to transform your business with next-gen technology services? Let's discuss how Codexiv can help you achieve your digital transformation goals.
+            Ready to transform your business with next-gen technology services? Let's discuss how Devsol can help you achieve your digital transformation goals.
           </motion.p>
         </div>
       </section>
@@ -182,7 +198,6 @@ const ContactPage = () => {
                         onChange={handleInputChange}
                         className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-neon-blue transition-colors duration-200"
                       >
-                        <option value="">Select a subject</option>
                         {subjects.map((subject) => (
                           <option key={subject} value={subject}>{subject}</option>
                         ))}
@@ -206,13 +221,26 @@ const ContactPage = () => {
                     />
                   </div>
 
-                  <button
-                    type="submit"
-                    className="w-full px-8 py-4 bg-gradient-to-r from-neon-blue to-neon-purple text-white rounded-xl font-semibold text-lg hover:shadow-lg hover:shadow-neon-blue/25 transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-2"
-                  >
-                    <Send className="h-5 w-5" />
-                    <span>Send Message</span>
-                  </button>
+                  {isSubmitting ? (
+                    <button
+                      type="submit"
+                      className="w-full px-8 py-4 bg-gradient-to-r from-neon-blue to-neon-purple text-white rounded-xl font-semibold text-lg hover:shadow-lg hover:shadow-neon-blue/25 transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-2"
+                    >
+                      <Loader2 className="h-5 w-5 animate-spin" />
+                      <span>Sending...</span>
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      className="w-full px-8 py-4 bg-gradient-to-r from-neon-blue to-neon-purple text-white rounded-xl font-semibold text-lg hover:shadow-lg hover:shadow-neon-blue/25 transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-2"
+                    >
+                      <Send className="h-5 w-5" />
+                      <span>Send Message</span>
+                    </button>
+                  )}
+                  {error && (
+                    <p className="text-red-500 text-center mt-4">{error}</p>
+                  )}
                 </form>
               )}
             </motion.div>
@@ -299,9 +327,6 @@ const ContactPage = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl font-bold text-white mb-4">Find Us</h2>
-            <p className="text-gray-300 text-lg">
-              Visit our headquarters in the heart of San Francisco's tech district
-            </p>
           </motion.div>
 
           <motion.div
@@ -315,11 +340,11 @@ const ContactPage = () => {
               <div className="text-center">
                 <MapPin className="h-16 w-16 text-neon-blue mx-auto mb-4" />
                 <p className="text-gray-300 text-lg">Interactive Map Coming Soon</p>
-                <p className="text-gray-500 text-sm">123 Tech Street, San Francisco, CA 94105</p>
+                <p className="text-gray-500 text-sm">Sahibzada Heights H13, Islamabad Pakistan</p>
               </div>
             </div>
             <p className="text-gray-400">
-              Located in the vibrant South of Market (SoMa) district, just minutes from major tech companies and transportation hubs.
+              Located in the vibrant Sahibzada Heights H13 area, a modern and accessible location for our clients.
             </p>
           </motion.div>
         </div>
@@ -339,7 +364,7 @@ const ContactPage = () => {
               Ready to Start Your Project?
             </h2>
             <p className="text-gray-300 mb-8 text-lg leading-relaxed">
-              Let's discuss how we can help transform your business with cutting-edge technology solutions.
+              Ready to transform your business with next-gen technology services? Let's discuss how Devsol can help you achieve your digital transformation goals.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="px-8 py-4 bg-gradient-to-r from-neon-blue to-neon-purple text-white rounded-full font-semibold text-lg hover:shadow-lg hover:shadow-neon-blue/25 transition-all duration-300 hover:scale-105">

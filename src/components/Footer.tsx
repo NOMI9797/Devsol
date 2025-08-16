@@ -8,10 +8,10 @@ const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   const socialLinks = [
-    { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/codexiv' },
-    { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/company/codexiv' },
-    { name: 'GitHub', icon: Github, href: 'https://github.com/codexiv' },
-    { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/codexiv' }
+    { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/devsol' },
+    { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/company/devsol' },
+    { name: 'GitHub', icon: Github, href: 'https://github.com/devsol' },
+    { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/devsol' }
   ]
 
   return (
@@ -27,9 +27,13 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-gradient-to-r from-neon-blue to-neon-purple rounded-lg flex items-center justify-center">
-                <Zap className="h-5 w-5 text-white" />
+                <img 
+                  src="/DS-Logo-NoBg.png" 
+                  alt="Devsol Logo" 
+                  className="h-5 w-5 object-contain"
+                />
               </div>
-              <span className="text-xl font-bold text-white">Codexiv</span>
+              <span className="text-xl font-bold text-white">Devsol</span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
               Leading technology services company specializing in AI development, web solutions, and digital transformation. 
@@ -99,18 +103,11 @@ const Footer = () => {
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-gray-800 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            {/* Copyright */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="text-gray-400 text-sm"
-            >
-              © {currentYear} Codexiv. All rights reserved.
-            </motion.div>
+        <div className="border-t border-gray-800 pt-8 mt-12">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <p className="text-gray-400 text-sm">
+              © {currentYear} Devsol. All rights reserved.
+            </p>
 
             {/* Social Links */}
             <motion.div

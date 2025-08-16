@@ -23,47 +23,89 @@ const OAuthCallback = () => {
         const userId = searchParams.get('userId')
         const sessionId = searchParams.get('sessionId')
 
+        console.log('OAuth Callback Parameters:', { errorParam, userId, sessionId })
+
         if (errorParam) {
-          throw new Error('Authentication failed')
+          throw new Error(`Authentication failed: ${errorParam}`)
         }
 
         if (!userId || !sessionId) {
-          throw new Error('Invalid OAuth response')
-        }
-
-        // Handle the OAuth callback
-        const result = await handleOAuthCallback(window.location.href)
-        
-        if (result.success) {
-          // Check if user has admin privileges
-          const isAdmin = await isUserAdmin(result.user)
+          // Check if we're in the middle of OAuth flow
+          const currentUrl = window.location.href
+          console.log('Current URL:', currentUrl)
           
-          if (isAdmin) {
-            setStatus('success')
-            setMessage('Authentication successful! Redirecting to admin dashboard...')
-            
-            // Redirect to admin dashboard after 2 seconds
-            setTimeout(() => {
-              router.push('/admin')
-            }, 2000)
+          // If no OAuth params, try to handle the callback anyway
+          if (currentUrl.includes('admin/auth/callback')) {
+            try {
+              const result = await handleOAuthCallback(currentUrl)
+              if (result.success) {
+                // Check if user has admin privileges
+                const isAdmin = await isUserAdmin(result.user)
+                
+                if (isAdmin) {
+                  setStatus('success')
+                  setMessage('Authentication successful! Redirecting to admin dashboard...')
+                  
+                  // Redirect to admin dashboard after 2 seconds
+                  setTimeout(() => {
+                    router.push('/admin')
+                  }, 2000)
+                } else {
+                  // User doesn't have admin privileges
+                  await deleteCurrentSession()
+                  setStatus('error')
+                  setMessage('Access denied. Admin privileges required.')
+                  
+                  // Redirect back to login after 3 seconds
+                  setTimeout(() => {
+                    router.push('/admin')
+                  }, 3000)
+                }
+              } else {
+                throw new Error('Authentication failed')
+              }
+            } catch (callbackError) {
+              console.error('Callback handling error:', callbackError)
+              throw callbackError
+            }
           } else {
-            // User doesn't have admin privileges
-            await deleteCurrentSession()
-            setStatus('error')
-            setMessage('Access denied. Admin privileges required.')
-            
-            // Redirect back to login after 3 seconds
-            setTimeout(() => {
-              router.push('/admin')
-            }, 3000)
+            throw new Error('Invalid OAuth response - missing userId and sessionId')
           }
         } else {
-          throw new Error('Authentication failed')
+          // Handle the OAuth callback with explicit parameters
+          const result = await handleOAuthCallback(window.location.href)
+          
+          if (result.success) {
+            // Check if user has admin privileges
+            const isAdmin = await isUserAdmin(result.user)
+            
+            if (isAdmin) {
+              setStatus('success')
+              setMessage('Authentication successful! Redirecting to admin dashboard...')
+              
+              // Redirect to admin dashboard after 2 seconds
+              setTimeout(() => {
+                router.push('/admin')
+              }, 2000)
+            } else {
+              // User doesn't have admin privileges
+              await deleteCurrentSession()
+              setStatus('error')
+              setMessage('Access denied. Admin privileges required.')
+              
+              // Redirect back to login after 3 seconds
+              setTimeout(() => {
+                router.push('/admin')
+              }, 3000)
+            }
+          } else {
+            throw new Error('Authentication failed')
+          }
         }
       } catch (error) {
         console.error('OAuth callback error:', error)
         setStatus('error')
-        setMessage('Authentication failed. Please try again.')
+        setMessage(`Authentication failed: ${error instanceof Error ? error.message : 'Unknown error'}`)
         
         // Redirect back to login after 3 seconds
         setTimeout(() => {

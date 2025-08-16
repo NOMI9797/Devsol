@@ -9,10 +9,10 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Codexiv - Building the Future, One Product at a Time",
-  description: "Codexiv develops next-gen AI and web solutions for tomorrow's challenges.",
-  keywords: "AI, web development, next-gen, technology, innovation, Codexiv",
-  authors: [{ name: "Codexiv Team" }],
+  title: "Devsol - Building the Future, One Product at a Time",
+  description: "Devsol develops next-gen AI and web solutions for tomorrow's challenges.",
+  keywords: "AI, web development, next-gen, technology, innovation, Devsol",
+  authors: [{ name: "Devsol Team" }],
 };
 
 export const viewport: Viewport = {

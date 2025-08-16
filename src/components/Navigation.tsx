@@ -40,11 +40,14 @@ const Navigation = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <div className="relative">
-              <Zap className="h-8 w-8 text-neon-blue" />
-              <div className="absolute inset-0 bg-neon-blue rounded-full blur-sm opacity-50"></div>
+              <img 
+                src="/DS-Logo-NoBg.png" 
+                alt="Devsol Logo" 
+                className="h-8 w-8 object-contain"
+              />
             </div>
             <span className="text-2xl font-bold bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent">
-              Codexiv
+              Devsol
             </span>
           </Link>
 

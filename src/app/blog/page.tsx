@@ -12,7 +12,7 @@ const BlogPage = () => {
       title: 'The Future of AI in Enterprise Software',
       excerpt: 'Discover how artificial intelligence is revolutionizing business operations and what this means for the future of enterprise software.',
       content: 'Artificial Intelligence is no longer just a buzzword—it\'s fundamentally changing how businesses operate. From predictive analytics to automated decision-making, AI is becoming the backbone of modern enterprise software...',
-      author: 'Marcus Johnson',
+      author: 'Devsol Team',
       date: '2024-01-15',
       readTime: '5 min read',
       category: 'AI & Machine Learning',
@@ -24,7 +24,7 @@ const BlogPage = () => {
       title: 'Building Scalable Cloud Infrastructure',
       excerpt: 'Learn the best practices for designing and implementing cloud infrastructure that can grow with your business needs.',
       content: 'Cloud infrastructure has become the foundation of modern applications. But building a scalable, reliable, and cost-effective cloud architecture requires careful planning and execution...',
-      author: 'Sarah Rodriguez',
+      author: 'Devsol Team',
       date: '2024-01-10',
       readTime: '7 min read',
       category: 'Cloud Computing',
@@ -36,7 +36,7 @@ const BlogPage = () => {
       title: 'Cybersecurity in the Age of AI',
       excerpt: 'Explore how AI is both a threat and a solution in modern cybersecurity, and what businesses need to know to stay protected.',
       content: 'As AI technology advances, so do the threats it poses to cybersecurity. However, AI is also becoming our greatest ally in detecting and preventing cyber attacks...',
-      author: 'Alex Chen',
+      author: 'Devsol Team',
       date: '2024-01-05',
       readTime: '6 min read',
       category: 'Cybersecurity',
@@ -48,7 +48,7 @@ const BlogPage = () => {
       title: 'Data-Driven Decision Making',
       excerpt: 'How businesses can leverage big data and analytics to make better, more informed decisions that drive growth.',
       content: 'In today\'s digital world, data is the new currency. Companies that can effectively collect, analyze, and act on their data have a significant competitive advantage...',
-      author: 'Elena Petrov',
+      author: 'Devsol Team',
       date: '2023-12-28',
       readTime: '8 min read',
       category: 'Data Analytics',
@@ -60,7 +60,7 @@ const BlogPage = () => {
       title: 'The Rise of No-Code Development',
       excerpt: 'How no-code platforms are democratizing software development and enabling non-technical users to build powerful applications.',
       content: 'No-code development platforms are changing the game for businesses that need custom software solutions but don\'t have the resources for traditional development...',
-      author: 'Marcus Johnson',
+      author: 'Devsol Team',
       date: '2023-12-20',
       readTime: '4 min read',
       category: 'Development',
@@ -72,7 +72,7 @@ const BlogPage = () => {
       title: 'Global Collaboration in Remote Teams',
       excerpt: 'Best practices for building and managing distributed teams that can collaborate effectively across different time zones and cultures.',
       content: 'The future of work is global and remote. Companies that can effectively manage distributed teams have access to talent pools worldwide...',
-      author: 'Sarah Rodriguez',
+      author: 'Devsol Team',
       date: '2023-12-15',
       readTime: '6 min read',
       category: 'Team Management',
@@ -99,16 +99,9 @@ const BlogPage = () => {
       <section className="pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 animated-bg"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-5xl md:text-6xl font-bold mb-6"
-          >
-            <span className="bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent">
-              Codexiv Blog
-            </span>
-          </motion.h1>
+          <h1 className="text-4xl font-bold mb-6 text-white">
+            Devsol Blog
+          </h1>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}

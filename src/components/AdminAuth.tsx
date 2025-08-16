@@ -116,13 +116,23 @@ const AdminAuth = () => {
     setSuccess('')
 
     try {
+      console.log('Starting Google OAuth login...')
+      
       // Create Google OAuth session
-      await createGoogleOAuthSession()
-      // The user will be redirected to Google OAuth
+      const session = await createGoogleOAuthSession()
+      console.log('OAuth session created successfully:', session)
+      
+      // The user should be redirected to Google OAuth
       // After successful OAuth, they'll return to the redirect URI
+      setSuccess('Redirecting to Google... Please complete the authentication.')
+      
+      // Note: The redirect should happen automatically via Appwrite
+      // If it doesn't, there might be an issue with the OAuth configuration
+      
     } catch (error: unknown) {
       console.error('Google OAuth error:', error)
-      setError('Google OAuth failed. Please try again.')
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred'
+      setError(`Google OAuth failed: ${errorMessage}`)
     } finally {
       setLoading(false)
     }
