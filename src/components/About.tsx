@@ -1,10 +1,11 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Target, Users, Rocket, Award, Zap, ArrowRight, User } from 'lucide-react'
+import { Target, Users, Rocket, Award, Zap, ArrowRight, Code, Brain, Globe, Palette, Shield, Workflow } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { getTeamMembers, getFileView } from '@/lib/appwrite'
+import { getTeamMembers } from '@/lib/appwrite'
 import Link from 'next/link'
+import TeamCard from './TeamCard'
 
 interface TeamMember {
   $id: string
@@ -39,6 +40,20 @@ const About = () => {
     } finally {
       setLoading(false)
     }
+  }
+
+  const getIconForRole = (role: string) => {
+    const roleLower = role.toLowerCase()
+    if (roleLower.includes('ceo') || roleLower.includes('founder')) return Rocket
+    if (roleLower.includes('cto') || roleLower.includes('engineering')) return Code
+    if (roleLower.includes('coo') || roleLower.includes('operations')) return Workflow
+    if (roleLower.includes('ai') || roleLower.includes('research')) return Brain
+    if (roleLower.includes('product')) return Target
+    if (roleLower.includes('design')) return Palette
+    if (roleLower.includes('marketing')) return Globe
+    if (roleLower.includes('sales')) return Users
+    if (roleLower.includes('finance')) return Shield
+    return Users
   }
 
   const stats = [
@@ -181,71 +196,12 @@ const About = () => {
 
             {/* Team Members Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {teamMembers.slice(0, 6).map((member, index) => (
-                <motion.div
-                  key={member.$id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="group"
-                >
-                  <div className="glass p-6 rounded-2xl border border-gray-800 hover:border-neon-blue/50 transition-all duration-300 hover:scale-105">
-                    {/* Profile Image */}
-                    <div className="w-20 h-20 mx-auto rounded-full overflow-hidden border-4 border-gray-700 group-hover:border-neon-blue/50 transition-colors duration-300 mb-4">
-                      {member.profilePic ? (
-                        <img
-                          src={getFileView(member.profilePic)}
-                          alt={member.name}
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            console.error('Image failed to load for team member:', member.name)
-                            console.error('profilePic value:', member.profilePic)
-                            console.error('Constructed URL:', getFileView(member.profilePic))
-                          }}
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-gradient-to-r from-neon-blue to-neon-purple flex items-center justify-center">
-                          <User className="h-10 w-10 text-white" />
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Member Info */}
-                    <div className="text-center">
-                      <h4 className="text-lg font-bold text-white mb-2 group-hover:text-neon-blue transition-colors duration-300">
-                        {member.name}
-                      </h4>
-                      <p className="text-neon-green font-semibold mb-3">{member.role}</p>
-                      <p className="text-gray-400 text-sm leading-relaxed line-clamp-2 mb-4">
-                        {member.longBio}
-                      </p>
-                      
-                      {/* Expertise Preview */}
-                      <div className="flex flex-wrap gap-2 justify-center mb-4">
-                        {member.expertise.slice(0, 2).map((skill, skillIndex) => (
-                          <span
-                            key={skillIndex}
-                            className="px-2 py-1 bg-gray-800/50 text-neon-blue text-xs rounded-full border border-gray-700"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                        {member.expertise.length > 2 && (
-                          <span className="px-2 py-1 bg-gray-800/50 text-gray-400 text-xs rounded-full border border-gray-700">
-                            +{member.expertise.length - 2} more
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Experience */}
-                      <div className="flex items-center justify-center space-x-2 text-gray-400 text-sm">
-                        <span>{member.experience}</span>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+              {teamMembers.slice(0, 6).map((member, index) => {
+                const IconComponent = getIconForRole(member.role)
+                return (
+                  <TeamCard key={member.$id} member={member} index={index} roleIcon={IconComponent} />
+                )
+              })}
             </div>
 
             {/* View All Team Button */}

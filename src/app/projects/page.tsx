@@ -82,14 +82,14 @@ const ProjectsPage = () => {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 relative overflow-hidden">
+      <section className="pt-24 md:pt-32 pb-16 md:pb-20 relative overflow-hidden">
         <div className="absolute inset-0 animated-bg"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-5xl md:text-6xl font-bold mb-6"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6"
           >
             <span className="bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent">
               Our Portfolio
@@ -99,7 +99,7 @@ const ProjectsPage = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4"
           >
             Discover how we've helped businesses transform their operations through innovative technology solutions. 
             Each project represents our commitment to excellence and client success.
@@ -112,12 +112,12 @@ const ProjectsPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
             {/* Category Filter */}
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2 md:gap-3">
               {categories.map((category) => (
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                  className={`px-2 md:px-4 rounded-full font-medium transition-all duration-300 text-md md:text-base ${
                     selectedCategory === category
                       ? 'bg-gradient-to-r from-neon-blue to-neon-purple text-white'
                       : 'glass border border-gray-800 text-gray-300 hover:border-neon-blue/50 hover:text-neon-blue'
@@ -129,14 +129,14 @@ const ProjectsPage = () => {
             </div>
 
             {/* Search */}
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <div className="relative w-full lg:w-auto">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 md:h-5 md:w-5 text-gray-400" />
               <input
                 type="text"
                 placeholder="Search projects..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 pr-4 py-3 bg-gray-900 border border-gray-700 rounded-full text-white placeholder-gray-500 focus:outline-none focus:border-neon-blue transition-colors duration-200 w-64"
+                className="pl-10 pr-4 py-2 md:py-3 bg-gray-900 border border-gray-700 rounded-full text-white placeholder-gray-500 focus:outline-none focus:border-neon-blue transition-colors duration-200 w-full lg:w-64 text-sm md:text-base"
               />
             </div>
           </div>
@@ -146,7 +146,7 @@ const ProjectsPage = () => {
       {/* Projects Grid */}
       <section className="py-20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {loading ? (
               <div className="col-span-full text-center py-20">
                 <Loader2 className="h-16 w-16 text-neon-blue animate-spin mx-auto" />
@@ -201,42 +201,42 @@ const ProjectsPage = () => {
                   viewport={{ once: true }}
                   className="group"
                 >
-                  <div className="glass p-6 rounded-3xl border border-gray-800 hover:border-neon-blue/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-neon-blue/20 relative overflow-hidden">
+                  <div className="glass p-4 md:p-6 rounded-2xl md:rounded-3xl border border-gray-800 hover:border-neon-blue/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-neon-blue/20 relative overflow-hidden">
                     {/* Background Gradient */}
                     <div className={`absolute inset-0 bg-gradient-to-br ${getProjectStyle(project.category).color} opacity-5 group-hover:opacity-10 transition-opacity duration-500`}></div>
                     
                     {/* Project Image */}
-                    <div className="relative z-10 mb-4">
-                      <div className="w-full h-48 bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl flex items-center justify-center relative overflow-hidden">
+                    <div className="relative z-10 mb-3 md:mb-4">
+                      <div className="w-full h-32 md:h-48 bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl md:rounded-2xl flex items-center justify-center relative overflow-hidden">
                         {project.mainPicture ? (
                           <img
                             src={getFileView(project.mainPicture)}
                             alt={project.title}
-                            className="w-full h-full object-cover rounded-t-xl"
+                            className="w-full h-full object-contain rounded-t-xl"
                             onError={(e) => {
                               console.error('Image failed to load for project:', project.title)
                               console.error('mainPicture value:', project.mainPicture)
                               console.error('Constructed URL:', getFileView(project.mainPicture))
                             }}
                           />
-                        ) : null}
-                        {/* Fallback */}
-                        <div className={`absolute inset-0 bg-gradient-to-br ${getProjectStyle(project.category).color} opacity-20 flex items-center justify-center ${project.mainPicture ? 'hidden' : ''}`}>
-                          {React.createElement(getProjectStyle(project.category).icon, { className: "h-12 w-12 text-neon-blue" })}
-                        </div>
+                        ) : (
+                          <div className={`absolute inset-0 bg-gradient-to-br ${getProjectStyle(project.category).color} opacity-20 flex items-center justify-center`}>
+                            {React.createElement(getProjectStyle(project.category).icon, { className: "h-12 w-12 text-neon-blue" })}
+                          </div>
+                        )}
                       </div>
                     </div>
                     
                     {/* Project Title */}
-                    <div className="relative z-10 mb-4">
-                      <h3 className="text-xl font-bold text-white group-hover:text-neon-blue transition-colors duration-300">
+                    <div className="relative z-10 mb-3 md:mb-4">
+                      <h3 className="text-lg md:text-xl font-bold text-white group-hover:text-neon-blue transition-colors duration-300">
                         {project.title}
                       </h3>
                     </div>
 
                     {/* Technologies */}
-                    <div className="relative z-10 mb-4">
-                      <div className="flex flex-wrap gap-2">
+                    <div className="relative z-10 mb-3 md:mb-4">
+                      <div className="flex flex-wrap gap-1 md:gap-2">
                         {project.technologies.slice(0, 3).map((tech, techIndex) => (
                           <span
                             key={techIndex}
@@ -260,7 +260,7 @@ const ProjectsPage = () => {
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex-1 px-3 py-2 bg-gradient-to-r from-neon-blue to-neon-purple text-white rounded-lg text-xs font-medium hover:shadow-lg hover:shadow-neon-blue/25 transition-all duration-300 flex items-center justify-center space-x-1"
+                          className="flex-1 px-2 py-1 bg-gradient-to-r from-neon-blue to-neon-purple text-white rounded-lg text-xs font-medium hover:shadow-lg hover:shadow-neon-blue/25 transition-all duration-300 flex items-center justify-center space-x-1"
                         >
                           <Eye className="h-3 w-3" />
                           <span>Live Demo</span>
@@ -268,7 +268,7 @@ const ProjectsPage = () => {
                       )}
                       <Link
                         href={`/projects/${project.$id}`}
-                        className={`px-3 py-2 glass border border-gray-700 text-gray-300 rounded-lg text-xs font-medium hover:border-neon-blue/50 hover:text-neon-blue transition-all duration-300 flex items-center justify-center ${project.liveUrl ? 'flex-1' : 'w-full'}`}
+                        className={`px-2 py-1 bg-gradient-to-r from-neon-blue to-neon-purple text-white rounded-lg text-xs font-medium hover:shadow-lg hover:shadow-neon-blue/25 transition-all duration-300 flex items-center justify-center ${project.liveUrl ? 'flex-1' : 'w-full'}`}
                       >
                         View Details
                       </Link>
@@ -299,10 +299,10 @@ const ProjectsPage = () => {
               with cutting-edge technology solutions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="px-8 py-4 bg-gradient-to-r from-neon-blue to-neon-purple text-white rounded-full font-semibold text-lg hover:shadow-lg hover:shadow-neon-blue/25 transition-all duration-300 hover:scale-105">
+              <Link href="/contact" className="px-2 py-1 bg-gradient-to-r from-neon-blue to-neon-purple text-white rounded-full font-semibold text-lg hover:shadow-lg hover:shadow-neon-blue/25 transition-all duration-300 hover:scale-105">
                 Start Your Project
               </Link>
-              <Link href="/services" className="px-8 py-4 glass border border-neon-blue/20 text-neon-blue rounded-full font-semibold text-lg hover:bg-neon-blue hover:text-white transition-all duration-300">
+              <Link href="/services" className="px-2 py-1 bg-gradient-to-r from-neon-blue to-neon-purple text-white rounded-full font-semibold text-lg hover:shadow-lg hover:shadow-neon-blue/25 transition-all duration-300 hover:scale-105">
                 View Our Services
               </Link>
             </div>

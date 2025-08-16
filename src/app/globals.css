@@ -138,23 +138,17 @@ body {
   color: white;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+/* Hide scrollbars completely */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
 
-::-webkit-scrollbar-track {
-  background: var(--dark-bg);
+*::-webkit-scrollbar {
+  display: none; /* WebKit browsers */
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--neon-blue);
-  border-radius: 4px;
-}
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--neon-cyan);
-}
 
 /* Futuristic gradient backgrounds */
 .gradient-bg {

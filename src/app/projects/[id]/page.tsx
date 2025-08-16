@@ -3,7 +3,7 @@
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import { motion } from 'framer-motion'
-import { ArrowLeft, Eye, ExternalLink, Calendar, Code, Globe, Brain, Shield, Cloud, Loader2 } from 'lucide-react'
+import { ArrowLeft, Eye, ExternalLink, Code, Globe, Brain, Shield, Cloud, Loader2, Code2 } from 'lucide-react'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
@@ -113,7 +113,7 @@ const ProjectDetailPage = () => {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 relative overflow-hidden">
+      <section className="pt-24 md:pt-32 pb-16 md:pb-20 relative overflow-hidden">
         <div className="absolute inset-0 animated-bg"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Back Button */}
@@ -121,82 +121,69 @@ const ProjectDetailPage = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-8"
+            className="mb-6 md:mb-8"
           >
             <Link
               href="/projects"
-              className="inline-flex items-center space-x-2 text-neon-blue hover:text-neon-blue/80 transition-colors"
+              className="inline-flex items-center space-x-2 text-neon-blue hover:text-neon-blue/80 transition-colors text-sm md:text-base"
             >
-              <ArrowLeft className="h-5 w-5" />
+              <ArrowLeft className="h-4 w-4 md:h-5 md:w-5" />
               <span>Back to Projects</span>
             </Link>
           </motion.div>
 
-          {/* Project Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <div className="inline-block px-4 py-2 bg-gradient-to-r from-neon-blue to-neon-purple text-white text-sm font-medium rounded-full mb-6">
-              {project.category}
-            </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
-              {project.title}
-            </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              {project.longDescription}
-            </p>
-          </motion.div>
-
-          {/* Project Image */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-16"
-          >
-            <div className="relative">
-              {project.mainPicture ? (
-                <img
-                  src={getFileView(project.mainPicture)}
-                  alt={project.title}
-                  className="w-full h-96 object-cover rounded-2xl mb-8"
-                  onError={(e) => {
-                    console.error('Image failed to load for project:', project.title)
-                    console.error('mainPicture value:', project.mainPicture)
-                    console.error('Constructed URL:', getFileView(project.mainPicture))
-                  }}
-                />
-              ) : null}
-              {/* Fallback */}
-              <div className={`w-full max-w-4xl mx-auto h-96 bg-gradient-to-br ${color} opacity-20 rounded-3xl border border-gray-800 flex items-center justify-center ${project.mainPicture ? 'hidden' : ''}`}>
-                <Icon className="h-24 w-24 text-neon-blue" />
-              </div>
-            </div>
-          </motion.div>
+          
 
           {/* Project Details */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {/* Main Content */}
-            <div className="lg:col-span-2 space-y-12">
-              {/* Technologies */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
+            {/* Left Side - Project Info */}
+            <div className="space-y-6 md:space-y-8 order-2 lg:order-1">
+              {/* Project Name & Category */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="glass p-8 rounded-3xl border border-gray-800"
+                className="space-y-4"
               >
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center space-x-3">
-                  <Code className="h-6 w-6 text-neon-blue" />
-                  <span>Technologies Used</span>
-                </h2>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex items-center space-x-1">
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center">
+                    <Icon className="h-7 w-7 text-white" />
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-bold text-white">{project.title}</h2>
+                </div>
+                </motion.div>
+
+              {/* Project Description */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="space-y-4"
+              >
+                <p className="text-gray-300 text-sm md:text-base leading-relaxed">
+                  {project.longDescription}
+                </p>
+                <div className="inline-block px-1 -py-1 bg-gradient-to-r from-neon-blue to-neon-purple text-white text-sm font-medium rounded-full">
+                  {project.category}
+                </div>
+              </motion.div>
+
+              {/* Tech Stack */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="space-y-4"
+              >
+                <h3 className="text-xl font-bold text-white flex items-center space-x-3">
+                  <Code2 className="h-5 w-5 text-neon-blue" />
+                  <span>Tech Stack</span>
+                </h3>
+                <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech, index) => (
                     <span
                       key={index}
-                      className="px-4 py-2 bg-gray-800 text-gray-300 text-sm rounded-full border border-gray-700"
+                      className="px-2 py-0 bg-gradient-to-r from-neon-blue/20 to-neon-purple/20 border border-neon-blue/30 text-neon-blue rounded-full text-md font-medium hover:bg-gradient-to-r hover:from-neon-blue/30 hover:to-neon-purple/30 hover:border-neon-blue/50 transition-all duration-300"
                     >
                       {tech}
                     </span>
@@ -204,74 +191,57 @@ const ProjectDetailPage = () => {
                 </div>
               </motion.div>
 
-              {/* Features */}
+              {/* CTA Buttons */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="glass p-8 rounded-3xl border border-gray-800"
-              >
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center space-x-3">
-                  <Globe className="h-6 w-6 text-neon-blue" />
-                  <span>Key Features</span>
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {project.features.map((feature, index) => (
-                    <div key={index} className="flex items-center space-x-3">
-                      <div className="w-2 h-2 bg-neon-blue rounded-full"></div>
-                      <span className="text-gray-300">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Sidebar */}
-            <div className="space-y-6">
-              {/* Project Info */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="glass p-6 rounded-2xl border border-gray-800"
-              >
-                <h3 className="text-lg font-semibold text-white mb-4">Project Information</h3>
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-3 text-gray-300">
-                    <Calendar className="h-4 w-4 text-neon-blue" />
-                    <span>Created: {new Date(project.createdAt).toLocaleDateString()}</span>
-                  </div>
-                  <div className="flex items-center space-x-3 text-gray-300">
-                    <Calendar className="h-4 w-4 text-neon-blue" />
-                    <span>Updated: {new Date(project.updatedAt).toLocaleDateString()}</span>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* CTA Buttons */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
-                className="space-y-3"
+                className="flex flex-col sm:flex-row gap-2"
               >
                 {project.liveUrl && (
                   <a
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full px-6 py-3 bg-gradient-to-r from-neon-blue to-neon-purple text-white rounded-xl font-medium hover:shadow-lg hover:shadow-neon-blue/25 transition-all duration-300 flex items-center justify-center space-x-2"
+                    className="flex-1 px-3 py-1 bg-gradient-to-r from-neon-blue to-neon-purple text-white rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-neon-blue/25 transition-all duration-300 flex items-center justify-center space-x-2"
                   >
-                    <Eye className="h-4 w-4" />
+                    <Eye className="h-3 w-3" />
                     <span>Live Demo</span>
                   </a>
                 )}
                 <Link
                   href="/contact"
-                  className="w-full px-6 py-3 glass border border-neon-blue/20 text-neon-blue rounded-xl font-medium hover:bg-neon-blue hover:text-white transition-all duration-300 flex items-center justify-center"
+                  className="flex-1 px-3 py-1 bg-gradient-to-r from-neon-blue to-neon-purple text-white rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-neon-blue/25 transition-all duration-300 flex items-center justify-center"
                 >
                   Start Similar Project
                 </Link>
+              </motion.div>
+            </div>
+
+            {/* Right Side - Project Image */}
+            <div className="order-1 lg:order-2">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="sticky top-8"
+              >
+                {project.mainPicture ? (
+                  <div className="relative">
+                    <img
+                      src={getFileView(project.mainPicture)}
+                      alt={project.title}
+                      className="w-full h-auto rounded-xl shadow-lg"
+                      onError={(e) => {
+                        console.error('Image failed to load for project:', project.title)
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <div className={`w-full h-64 bg-gradient-to-br ${color} opacity-20 rounded-xl border border-gray-800 flex items-center justify-center`}>
+                    <Icon className="h-16 w-16 text-neon-blue" />
+                  </div>
+                )}
               </motion.div>
             </div>
           </div>

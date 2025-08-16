@@ -15,6 +15,7 @@ interface Service {
   longDescription: string
   createdAt: string
   updatedAt: string
+  features: string[]
 }
 
 const ServicesPage = () => {
@@ -149,7 +150,7 @@ const ServicesPage = () => {
                     viewport={{ once: true }}
                     className="group"
                   >
-                    <div className="glass p-8 rounded-3xl border border-gray-800 hover:border-neon-blue/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-neon-blue/20 relative overflow-hidden">
+                    <div className="glass p-8 rounded-3xl border border-gray-800 hover:border-neon-blue/50 transition-all duration-500 hover:scale-102 hover:shadow-2xl hover:shadow-neon-blue/20 relative overflow-hidden">
                       {/* Background Gradient */}
                       <div className={`absolute inset-0 bg-gradient-to-br ${color} opacity-5 group-hover:opacity-10 transition-opacity duration-500`}></div>
                       
@@ -161,13 +162,14 @@ const ServicesPage = () => {
                           </span>
                           <div className="flex items-center space-x-1">
                             <Star className="h-4 w-4 text-yellow-500 fill-current" />
-                            <span className="text-sm text-gray-300">4.9</span>
-                            <span className="text-xs text-gray-500">(127)</span>
+                            <span className="text-sm text-gray-300">{(Math.floor(Math.random() * 10) / 100 + 4.90).toFixed(2)}</span>
+                            <span className="text-xs text-gray-500">({Math.floor(Math.random() * 100) + 1})</span>
                           </div>
                         </div>
                         
                         <div className="flex items-center space-x-4 mb-4">
-                          <div className={`w-16 h-16 bg-gradient-to-r ${color} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                          {/* <div className={`w-16 h-16 bg-gradient-to-r ${color} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}> */}
+                          <div className={`w-16 h-16 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
                             {React.createElement(icon, { className: "h-8 w-8 text-white" })}
                           </div>
                           <div>
@@ -188,52 +190,14 @@ const ServicesPage = () => {
                       {/* Features */}
                       <div className="relative z-10 mb-6">
                         <h4 className="text-lg font-semibold text-white mb-4">Key Features</h4>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                          <div className="flex items-center space-x-3">
+                        {service.features.map((feature, index) => (
+                          <div key={index} className="flex items-center space-x-2">
                             <Check className="h-4 w-4 text-neon-blue flex-shrink-0" />
-                            <span className="text-gray-300 text-sm">Custom AI Model Development</span>
+                            <span className="text-gray-300 text-sm">{feature}</span>
                           </div>
-                          <div className="flex items-center space-x-3">
-                            <Check className="h-4 w-4 text-neon-blue flex-shrink-0" />
-                            <span className="text-gray-300 text-sm">Machine Learning Pipeline Design</span>
-                          </div>
-                          <div className="flex items-center space-x-3">
-                            <Check className="h-4 w-4 text-neon-blue flex-shrink-0" />
-                            <span className="text-gray-300 text-sm">Natural Language Processing</span>
-                          </div>
-                          <div className="flex items-center space-x-3">
-                            <Check className="h-4 w-4 text-neon-blue flex-shrink-0" />
-                            <span className="text-gray-300 text-sm">Computer Vision Solutions</span>
-                          </div>
-                          <div className="flex items-center space-x-3">
-                            <Check className="h-4 w-4 text-neon-blue flex-shrink-0" />
-                            <span className="text-gray-300 text-sm">Predictive Analytics & Forecasting</span>
-                          </div>
-                          <div className="flex items-center space-x-3">
-                            <Check className="h-4 w-4 text-neon-blue flex-shrink-0" />
-                            <span className="text-gray-300 text-sm">AI-Powered Automation</span>
-                          </div>
-                          <div className="flex items-center space-x-3">
-                            <Check className="h-4 w-4 text-neon-blue flex-shrink-0" />
-                            <span className="text-gray-300 text-sm">Real-time Data Processing</span>
-                          </div>
-                          <div className="flex items-center space-x-3">
-                            <Check className="h-4 w-4 text-neon-blue flex-shrink-0" />
-                            <span className="text-gray-300 text-sm">Model Training & Optimization</span>
-                          </div>
-                        </div>
+                        ))}
                       </div>
 
-                      {/* CTA Buttons */}
-                      <div className="relative z-10 flex flex-col sm:flex-row gap-3">
-                        <Link href="/contact" className="flex-1 px-6 py-3 bg-gradient-to-r from-neon-blue to-neon-purple text-white rounded-xl font-medium hover:shadow-lg hover:shadow-neon-blue/25 transition-all duration-300 group-hover:scale-105 flex items-center justify-center space-x-2">
-                          <span>Get Started</span>
-                          <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
-                        </Link>
-                        <button className="px-6 py-3 glass border border-neon-blue/20 text-neon-blue rounded-xl font-medium hover:bg-neon-blue hover:text-white transition-all duration-300">
-                          Learn More
-                        </button>
-                      </div>
                     </div>
                   </motion.div>
                 )
@@ -319,10 +283,10 @@ const ServicesPage = () => {
               and drive innovation in your industry.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="px-8 py-4 bg-gradient-to-r from-neon-blue to-neon-purple text-white rounded-full font-semibold text-lg hover:shadow-lg hover:shadow-neon-blue/25 transition-all duration-300 hover:scale-105">
+              <Link href="/contact" className="px-4 py-2 bg-gradient-to-r from-neon-blue to-neon-purple text-white rounded-full font-semibold text-lg hover:shadow-lg hover:shadow-neon-blue/25 transition-all duration-300 hover:scale-105">
                 Schedule Consultation
               </Link>
-              <button className="px-8 py-4 glass border border-neon-blue/20 text-neon-blue rounded-full font-semibold text-lg hover:bg-neon-blue hover:text-white transition-all duration-300">
+              <button className="px-4 py-2 glass border border-neon-blue/20 text-neon-blue rounded-full font-semibold text-lg hover:bg-neon-blue hover:text-white transition-all duration-300">
                 Download Service Guide
               </button>
             </div>

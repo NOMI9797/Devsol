@@ -31,25 +31,26 @@ const Navigation = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'glass backdrop-blur-md' : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'glass backdrop-blur-md' : 'bg-transparent'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center space-x-0.5">
             <div className="relative">
-              <img 
-                src="/DS-Logo-NoBg.png" 
-                alt="Devsol Logo" 
-                className="h-8 w-8 object-contain"
+              <img
+                src="/DS-Logo-NoBg.png"
+                alt="Devsol Logo"
+                className="h-10 w-10 object-contain"
               />
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent">
-              Devsol
+            <span className="text-4xl font-bold font-[Impact] tracking-wide text-[#CA9146] mt-2">
+              evSol
             </span>
           </Link>
+
+
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
@@ -107,8 +108,8 @@ const Navigation = () => {
                   {item.name}
                 </Link>
               ))}
-              <Link 
-                href="/admin" 
+              <Link
+                href="/admin"
                 onClick={() => setIsOpen(false)}
                 className="block text-neon-blue hover:text-neon-cyan transition-colors duration-200 font-medium py-2 border-t border-gray-700 pt-4"
               >
