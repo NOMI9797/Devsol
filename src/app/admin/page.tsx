@@ -28,6 +28,7 @@ import ProjectManager from '@/components/admin/ProjectManager'
 import TeamManager from '@/components/admin/TeamManager'
 import ServiceManager from '@/components/admin/ServiceManager'
 import ContactManager from '@/components/admin/ContactManager'
+import BlogManager from '@/components/admin/BlogManager'
 
 interface User {
   $id: string
@@ -398,13 +399,7 @@ const AdminDashboard = () => {
         {activeTab === 'team' && <TeamManager />}
 
         {/* Blog Tab */}
-        {activeTab === 'blog' && (
-          <div className="text-center text-gray-400 py-20">
-            <FileText className="h-16 w-16 mx-auto mb-4 opacity-50" />
-            <h2 className="text-2xl font-bold mb-2">Blog Management</h2>
-            <p>Blog management functionality coming soon...</p>
-          </div>
-        )}
+        {activeTab === 'blog' && <BlogManager />}
 
         {/* Services Tab */}
         {activeTab === 'services' && <ServiceManager />}

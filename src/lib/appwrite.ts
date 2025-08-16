@@ -210,6 +210,45 @@ export const createBlogPost = async (data: {
   }
 }
 
+export const updateBlogPost = async (blogId: string, data: {
+  title?: string
+  excerpt?: string
+  content?: string
+  category?: string
+  tags?: string[]
+  imageUrl?: string
+}) => {
+  try {
+    const response = await databases.updateDocument(
+      DATABASE_ID,
+      COLLECTIONS.BLOG_POSTS,
+      blogId,
+      {
+        ...data,
+        updatedAt: getShortTimestamp()
+      }
+    )
+    return response
+  } catch (error) {
+    console.error('Error updating blog post:', error)
+    throw error
+  }
+}
+
+export const deleteBlogPost = async (blogId: string) => {
+  try {
+    const response = await databases.deleteDocument(
+      DATABASE_ID,
+      COLLECTIONS.BLOG_POSTS,
+      blogId
+    )
+    return response
+  } catch (error) {
+    console.error('Error deleting blog post:', error)
+    throw error
+  }
+}
+
 export const createService = async (data: {
   name: string
   longDescription: string
